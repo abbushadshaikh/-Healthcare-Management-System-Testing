@@ -1,0 +1,22 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+def test_create_patient_record():
+    driver = webdriver.Chrome()
+    driver.get("http://your-healthcare-system.com/patients/create")
+
+    # Fill out patient details
+    driver.find_element(By.NAME, "name").send_keys("John Doe")
+    driver.find_element(By.NAME, "dob").send_keys("1985-06-15")
+    driver.find_element(By.NAME, "contact").send_keys("1234567890")
+    driver.find_element(By.NAME, "email").send_keys("john.doe@example.com")
+    
+    # Submit form
+    driver.find_element(By.NAME, "submit").click()
+
+    # Verify patient creation
+    success_message = driver.find_element(By.ID, "success-message").text
+    assert "Patient record created successfully" in success_message
+
+    driver.quit()
