@@ -1,0 +1,35 @@
+# Update:
+
+
+def test_update_patient_record():
+    driver = webdriver.Chrome()
+    driver.get("http://your-healthcare-system.com/patients/1/edit")
+
+    # Update patient contact details
+    driver.find_element(By.NAME, "contact").clear()
+    driver.find_element(By.NAME, "contact").send_keys("0987654321")
+    
+    # Submit form
+    driver.find_element(By.NAME, "submit").click()
+
+    # Verify update
+    success_message = driver.find_element(By.ID, "success-message").text
+    assert "Patient record updated successfully" in success_message
+
+    driver.quit()
+
+# Delete: 
+
+def test_delete_patient_record():
+    driver = webdriver.Chrome()
+    driver.get("http://your-healthcare-system.com/patients/1/delete")
+
+    # Confirm deletion
+    driver.find_element(By.NAME, "confirm").click()
+
+    # Verify deletion
+    success_message = driver.find_element(By.ID, "success-message").text
+    assert "Patient record deleted successfully" in success_message
+
+    driver.quit()
+
