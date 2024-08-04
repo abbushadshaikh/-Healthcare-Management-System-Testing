@@ -1,0 +1,14 @@
+// Database Testing with Python //
+
+
+import sqlite3
+
+connection = sqlite3.connect("healthcare.db")
+cursor = connection.cursor()
+
+cursor.execute("SELECT * FROM patients WHERE name = 'John Doe'")
+patient = cursor.fetchone()
+
+assert patient is not None
+connection.close()
+
