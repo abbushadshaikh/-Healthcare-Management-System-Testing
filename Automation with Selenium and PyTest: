@@ -1,0 +1,25 @@
+       // Automating with Selenium and PyTest //
+
+
+import pytest
+from selenium import webdriver
+
+@pytest.fixture
+def setup():
+    driver = webdriver.Chrome()
+    driver.get("http://your-healthcare-system.com")
+    yield driver
+    driver.quit()
+
+def test_add_patient(setup):
+    driver = setup
+    driver.find_element(By.ID, "login").send_keys("admin")
+    driver.find_element(By.ID, "password").send_keys("admin123")
+    driver.find_element(By.ID, "submit").click()
+
+    # Add patient process here
+    driver.find_element(By.ID, "add_patient").click()
+    driver.find_element(By.NAME, "patient_name").send_keys("John Doe")
+    driver.find_element(By.ID, "save").click()
+
+    assert "John Doe" in driver.page_source
