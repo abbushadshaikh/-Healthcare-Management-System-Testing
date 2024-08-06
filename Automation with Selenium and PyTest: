@@ -7,7 +7,7 @@ from selenium import webdriver
 @pytest.fixture
 def setup():
     driver = webdriver.Chrome()
-    driver.get("http://your-healthcare-system.com")
+    driver.get("https://katalon-demo-cura.herokuapp.com/")
     yield driver
     driver.quit()
 
